@@ -1,0 +1,2 @@
+mongo_collection: "sitiosWeb"
+url_list_source: "https://raw.githubusercontent.com/cfuentea/raspberry-pi-chromium-webdriver/master/sitios.txt"

@@ -1,0 +1,11 @@
+
+services:
+  sonda:
+    image: 172.30.236.20:5000/gss/sonda:last
+    container_name: sonda
+    environment:
+      - TZ=America/Santiago
+      - REDIS_HOST=172.30.236.20         
+      - REDIS_QUEUE=upx_results  
+      - UXP=${HOSTNAME}
+    restart: always

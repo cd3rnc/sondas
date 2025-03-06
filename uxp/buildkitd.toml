@@ -1,0 +1,4 @@
+debug = true
+[registry."172.30.236.20:5000"]
+    insecure = true
+    skip_verify = true

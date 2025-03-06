@@ -1,0 +1,7 @@
+hosts:
+  - netflix.com
+  - lun.com
+dns:
+  - 8.8.8.8
+count: 10  
+timeout: 10 # Opcional

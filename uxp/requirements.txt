@@ -1,0 +1,11 @@
+pyyaml
+ping3
+redis
+dnspython
+cryptography==3.3.2
+pymongo
+requests
+selenium==4.0.0
+pyvirtualdisplay
+psutil
+python-dotenv
