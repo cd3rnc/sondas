@@ -1,0 +1,41 @@
+FROM python:3.12
+
+WORKDIR /app
+
+COPY main3.py insert_into_mongodb.py qos.py streamsh.py execute_streaming.sh test.sh ./
+COPY streamlink-7.1.2-1-cp312-cp312-manylinux_2_28_aarch64.AppImage ./
+COPY .env ./
+COPY requirements.txt ./
+
+RUN apt-get update && apt-get install -y \
+    tcpdump \
+    wget \
+    ca-certificates \
+    chromium-driver \
+    chromium \
+    libfuse2 \
+    cron \
+    vim \
+    && rm -rf /var/lib/apt/lists/*
+
+RUN pip install --no-cache-dir -r requirements.txt
+
+RUN mkdir -p /app/squashfs-root && \
+    ./streamlink-7.1.2-1-cp312-cp312-manylinux_2_28_aarch64.AppImage --appimage-extract && \
+    chmod -R +x ./squashfs-root/AppRun execute_streaming.sh
+
+RUN chmod +x execute_streaming.sh test.sh
+
+# Copiar el archivo de configuración de cron
+COPY crontab /etc/cron.d/my-cron-job
+
+# Dar permisos de ejecución al archivo de cron
+RUN chmod 0644 /etc/cron.d/my-cron-job
+
+# Crear el archivo de log para cron
+RUN touch /var/log/cron.log
+
+EXPOSE 80 443
+
+# Ejecutar cron en primer plano para mantener el contenedor en ejecución
+CMD ["cron", "-f"]

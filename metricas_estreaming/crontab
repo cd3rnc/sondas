@@ -1,0 +1,1 @@
+*/5 * * * * root cd /app && /usr/local/bin/python3 /app/main3.py >> /var/log/cron.log 2>&1

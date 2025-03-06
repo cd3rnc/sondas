@@ -1,0 +1,8 @@
+requests
+scapy
+matplotlib
+numpy
+selenium
+beautifulsoup4
+pymongo
+python-dotenv
